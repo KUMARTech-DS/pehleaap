@@ -1,0 +1,29 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: pehle-aap-alerts
+  namespace: pehle-aap
+  labels:
+    release: nudgebee-prometheus
+spec:
+  groups:
+    - name: pehle-aap.rules
+      rules:
+        - alert: PehleAapHigh5xx
+          expr: sum(rate(http_requests_total{status=~"5.."}[2m])) / clamp_min(sum(rate(http_requests_total[2m])), 0.001) > 0.05
+          for: 2m
+          labels: { severity: critical }
+          annotations:
+            summary: "Pehle Aap API 5xx rate above 5%"
+        - alert: PehleAapSarvamSlow
+          expr: histogram_quantile(0.95, sum(rate(sarvam_latency_seconds_bucket[5m])) by (le)) > 5
+          for: 2m
+          labels: { severity: warning }
+          annotations:
+            summary: "Sarvam p95 latency above 5 seconds"
+        - alert: PehleAapPhotoMatchErrors
+          expr: increase(photo_match_errors_total[5m]) > 5
+          for: 1m
+          labels: { severity: warning }
+          annotations:
+            summary: "Photo match errors increased"

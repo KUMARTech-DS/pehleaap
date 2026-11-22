@@ -1,0 +1,1263 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>body { margin: 0; }</style>
+<title>Pehle Aap</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Kalam:wght@700&family=Mukta:wght@400;500;600;700&family=Rozha+One&display=swap">
+<style>
+/* Layout: long-form explainer. A token-board hero, then one 68ch reading column per section,
+   with tables, diagrams, demos and mock screens breaking out to the full 1080px track. */
+:root {
+  --bg: #F7F9F3;
+  --surface: #FFFFFF;
+  --sunken: #EDF1E7;
+  --ink: #1B2318;
+  --muted: #5A6655;
+  --line: #D8DFD0;
+  --accent: #E8950F;
+  --accent-ink: #8C5300;
+  --accent-soft: #FBEBCF;
+  --green: #335C28;
+  --green-soft: #E1ECD6;
+  --peacock: #1D6680;
+  --peacock-soft: #DCEBF0;
+  --red: #A5301D;
+  --red-soft: #F6E1DB;
+  --board-bg: #10150E;
+  --board-fg: #F5B23C;
+  --board-dim: #A08A58;
+  --board-glow: rgba(245, 178, 60, 0.35);
+  --paper: #FFF8EB;
+  --paper-flap: #F3E4C6;
+  --paper-ink: #2B2417;
+  --paper-red: #A5301D;
+  --font-display: "Rozha One", Georgia, "Times New Roman", serif;
+  --font-body: "Mukta", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-hand: "Kalam", "Segoe Print", "Bradley Hand", cursive;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --measure: 68ch;
+  --wide: 1080px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F140D; --surface: #161D13; --sunken: #0B0F09; --ink: #E8EDE2; --muted: #A1AD9A; --line: #2A3525;
+    --accent: #F2A93B; --accent-ink: #F5BD5F; --accent-soft: #3A2A10;
+    --green: #9DCA82; --green-soft: #1E2B19; --peacock: #7CC3DB; --peacock-soft: #13262E;
+    --red: #EF8E7D; --red-soft: #391B15;
+    --paper: #F2EADA; --paper-flap: #E4D5B8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F140D; --surface: #161D13; --sunken: #0B0F09; --ink: #E8EDE2; --muted: #A1AD9A; --line: #2A3525;
+  --accent: #F2A93B; --accent-ink: #F5BD5F; --accent-soft: #3A2A10;
+  --green: #9DCA82; --green-soft: #1E2B19; --peacock: #7CC3DB; --peacock-soft: #13262E;
+  --red: #EF8E7D; --red-soft: #391B15;
+  --paper: #F2EADA; --paper-flap: #E4D5B8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 17px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+a { color: var(--accent-ink); }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+p, ul, ol, dl, figure { margin: 0; }
+b, strong { font-weight: 600; }
+code { font-family: var(--font-mono); font-size: 0.86em; background: var(--sunken); padding: 0.1em 0.35em; border-radius: 4px; overflow-wrap: anywhere; }
+pre { margin: 0; background: var(--sunken); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 0.82rem; line-height: 1.6; color: var(--ink); }
+pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
+.wrap { max-width: var(--wide); margin-inline: auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.muted { color: var(--muted); }
+.small { font-size: 0.88rem; }
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* Navigation */
+.nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 9; background: var(--surface); border-bottom: 1px solid var(--line); }
+.nav .wrap { display: flex; align-items: center; gap: 18px; min-height: 52px; }
+.brand { font-family: var(--font-display); font-weight: 400; font-size: 1.25rem; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.nav-links { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; min-width: 0; }
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
+.nav-links a:hover { color: var(--ink); background: var(--sunken); }
+
+/* Hero */
+.hero { padding-block: 56px 52px; }
+.hero .wrap { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px 48px; align-items: center; }
+@media (max-width: 820px) { .hero .wrap { grid-template-columns: minmax(0, 1fr); } }
+.eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-ink); }
+.hero-text { display: grid; gap: 6px; }
+h1 { font-family: var(--font-display); font-weight: 400; font-size: clamp(3.2rem, 9vw, 5.6rem); line-height: 1; margin: 6px 0 0; }
+.deva { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.4rem, 3.6vw, 1.9rem); line-height: 1.2; color: var(--accent-ink); }
+.tagline { font-size: clamp(1.2rem, 2.6vw, 1.45rem); line-height: 1.4; margin-top: 14px; max-width: 30ch; text-wrap: balance; }
+.gloss { color: var(--muted); font-size: 0.95rem; margin-top: 6px; }
+
+.board { background: var(--board-bg); color: var(--board-fg); border-radius: 16px; padding: 22px 26px 18px; font-family: var(--font-mono); display: grid; gap: 4px; }
+.board-label { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--board-dim); }
+.board-now { font-size: clamp(4.2rem, 12vw, 6.6rem); line-height: 1; font-weight: 500; letter-spacing: 0.04em; font-variant-numeric: tabular-nums; text-shadow: 0 0 22px var(--board-glow); margin-bottom: 10px; }
+.board-next { display: flex; gap: 20px; font-size: 1.7rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.board figcaption { font-family: var(--font-body); font-size: 0.82rem; color: var(--board-dim); margin-top: 12px; border-top: 1px solid var(--board-dim); padding-top: 10px; }
+
+.equation-block { grid-column: 1 / -1; display: grid; gap: 10px; }
+.equation { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px; font-size: 1.05rem; }
+.eq-part { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 14px; font-weight: 500; }
+.eq-op { color: var(--muted); font-weight: 600; }
+.eq-result { font-weight: 700; color: var(--accent-ink); }
+.hand { font-family: var(--font-hand); font-weight: 700; font-size: 1.15em; }
+.eq-text { color: var(--muted); max-width: var(--measure); }
+
+/* Sections */
+main > section { border-top: 1px solid var(--line); padding-block: 64px; scroll-margin-top: 56px; }
+main > section > .wrap { display: grid; gap: 28px; }
+.sec-head { display: grid; gap: 6px; }
+h2 { font-family: var(--font-display); font-weight: 400; font-size: clamp(1.9rem, 4.2vw, 2.7rem); line-height: 1.12; margin: 0; text-wrap: balance; }
+h3 { font-size: 1.25rem; font-weight: 700; line-height: 1.3; margin: 0; text-wrap: balance; }
+h4 { font-size: 1rem; font-weight: 700; line-height: 1.35; margin: 0; }
+.lead { font-size: 1.12rem; max-width: var(--measure); }
+.block { display: grid; gap: 14px; }
+
+.points { list-style: none; padding: 0; display: grid; gap: 10px; max-width: var(--measure); }
+.points > li { position: relative; padding-left: 18px; }
+.points > li::before { content: ""; position: absolute; left: 2px; top: 0.72em; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+.steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 14px; max-width: var(--measure); }
+.steps > li { counter-increment: s; display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 10px; }
+.steps > li::before { content: counter(s); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; border: 1px solid var(--line); background: var(--surface); font-weight: 700; font-size: 0.85rem; color: var(--accent-ink); margin-top: 1px; }
+.steps > li > div { display: grid; gap: 8px; min-width: 0; }
+
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 36px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 28px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+@media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .grid-2, .grid-3 { grid-template-columns: minmax(0, 1fr); } }
+@media (max-width: 520px) { .grid-4 { grid-template-columns: minmax(0, 1fr); } }
+.item { display: grid; gap: 4px; align-content: start; min-width: 0; }
+.item p { color: var(--muted); }
+
+/* Problem */
+.phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+@media (max-width: 860px) { .phases { grid-template-columns: minmax(0, 1fr); } }
+.phase { display: grid; gap: 12px; align-content: start; padding-top: 14px; border-top: 2px solid var(--red); min-width: 0; }
+.phase ul { padding-left: 1.1em; display: grid; gap: 10px; }
+.callout { background: var(--sunken); border-radius: 12px; padding: 18px 20px; display: grid; gap: 6px; max-width: 820px; }
+.date-row { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+.date-row li { display: grid; gap: 2px; border: 1px solid var(--line); border-radius: 10px; padding: 8px 14px; background: var(--surface); min-width: 118px; }
+.date-row b { font-family: var(--font-display); font-weight: 400; font-size: 1.9rem; line-height: 1; }
+.date-row span { font-size: 0.82rem; color: var(--muted); }
+.date-row .is-finals { border-color: var(--accent); background: var(--accent-soft); }
+.date-row .is-finals span { color: var(--accent-ink); font-weight: 600; }
+
+/* Journey */
+.journey { list-style: none; padding: 0; display: grid; grid-template-columns: 3fr 2fr 3fr; gap: 24px; counter-reset: step; }
+@media (max-width: 860px) { .journey { grid-template-columns: minmax(0, 1fr); } }
+.j-phase { display: grid; gap: 8px; align-content: start; border-top: 2px solid var(--green); padding-top: 10px; min-width: 0; }
+.j-label { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+.j-phase > ol { list-style: none; padding: 0; display: grid; gap: 4px; }
+.j-phase > ol > li { counter-increment: step; display: grid; grid-template-columns: 28px minmax(0, 1fr); column-gap: 10px; padding: 6px 0; }
+.j-phase > ol > li::before { content: counter(step); grid-row: span 2; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent-ink); font-weight: 700; font-size: 0.85rem; }
+.j-phase > ol > li > span { grid-column: 2; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+.j-phase > ol > li.is-key { background: var(--accent-soft); border-radius: 10px; padding: 8px 10px; }
+.j-phase > ol > li.is-key::before { background: var(--accent); color: var(--paper-ink); }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+table { width: 100%; border-collapse: collapse; min-width: 620px; font-size: 0.94rem; }
+th { text-align: left; font-weight: 600; color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid var(--line); padding: 10px 14px; white-space: nowrap; }
+td { border-bottom: 1px solid var(--line); padding: 11px 14px; vertical-align: top; line-height: 1.5; }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; }
+td.num, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Connections */
+.carrier { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start; min-width: 0; }
+.carrier p { color: var(--muted); font-size: 0.92rem; line-height: 1.5; }
+.sample { justify-self: start; font-family: var(--font-mono); font-size: 0.85rem; background: var(--sunken); border-radius: 6px; padding: 2px 8px; max-width: 100%; overflow-wrap: anywhere; }
+.sample.token { background: var(--board-bg); color: var(--board-fg); font-size: 1.1rem; font-weight: 500; }
+.linkmap { list-style: none; padding: 0; display: grid; gap: 12px; }
+.linkmap li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.chip { display: inline-flex; align-items: center; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 12px; font-size: 0.9rem; font-weight: 500; white-space: nowrap; }
+.chip.token { font-family: var(--font-mono); background: var(--board-bg); color: var(--board-fg); border-color: var(--board-bg); }
+.chip.family { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-ink); font-weight: 600; }
+.chip.ledger { background: var(--green-soft); border-color: var(--green); color: var(--green); font-weight: 600; }
+.to { color: var(--muted); }
+.note-inline { color: var(--muted); font-size: 0.88rem; }
+
+.seq { list-style: none; padding: 0; display: grid; border-left: 2px solid var(--line); margin-left: 7px; max-width: 820px; }
+.seq li { position: relative; padding: 9px 0 9px 22px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+.seq li::before { content: ""; position: absolute; left: -8px; top: 16px; width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 2px solid var(--muted); }
+.seq li.moment::before { background: var(--accent); border-color: var(--accent); }
+.seq li.moment .msg { font-weight: 700; color: var(--accent-ink); }
+.actor { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+.a-guest { background: var(--accent-soft); color: var(--accent-ink); }
+.a-stage { background: var(--green-soft); color: var(--green); }
+.a-server { background: var(--sunken); color: var(--ink); border: 1px solid var(--line); }
+.a-photo { background: var(--peacock-soft); color: var(--peacock); }
+.msg { min-width: 0; }
+
+/* Architecture */
+.arch { display: grid; grid-template-columns: minmax(0, 1.5fr) auto minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: center; }
+.tier { display: grid; gap: 10px; min-width: 0; }
+.tier-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.tier-boxes { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.box, .tier-boxes li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; display: grid; gap: 2px; min-width: 0; }
+.box b, .tier-boxes b { font-size: 0.95rem; }
+.box span, .tier-boxes span { color: var(--muted); font-size: 0.84rem; line-height: 1.35; }
+.box-strong { border-color: var(--accent); background: var(--accent-soft); }
+.arch-arrow { font-size: 1.6rem; color: var(--muted); text-align: center; line-height: 1; }
+@media (max-width: 860px) { .arch { grid-template-columns: minmax(0, 1fr); } .arch-arrow { transform: rotate(90deg); } }
+.bypass { list-style: none; padding: 0; display: grid; gap: 10px; }
+.bypass li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+
+.tables-grid .item { border-top: 1px solid var(--line); padding-top: 10px; }
+.tables-grid h4 { font-family: var(--font-mono); font-weight: 500; font-size: 0.95rem; }
+details { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+summary { cursor: pointer; padding: 12px 16px; font-weight: 600; }
+details pre { margin: 0 12px 12px; }
+
+/* Features */
+.feature-index { display: flex; flex-wrap: wrap; gap: 8px; }
+.feature-index a { text-decoration: none; color: var(--ink); }
+.features { display: grid; gap: 72px; }
+.feature { display: grid; gap: 18px; scroll-margin-top: 64px; }
+.feature-head { display: grid; gap: 4px; }
+.phase-tag { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); }
+.sub { display: grid; gap: 10px; }
+.sub h4 { font-size: 1.02rem; }
+
+.mock { border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 14px 16px; display: grid; gap: 12px; max-width: 560px; min-width: 0; }
+.mock-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.ex { font-size: 0.68rem; letter-spacing: 0.08em; border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; }
+.wish-list { list-style: none; padding: 0; display: grid; gap: 6px; }
+.wish-list li { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 10px; border-radius: 8px; background: var(--bg); border: 1px solid var(--line); }
+.wish-list small { color: var(--muted); margin-left: 6px; }
+.state { font-size: 0.78rem; font-weight: 600; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.state.open { background: var(--green-soft); color: var(--green); }
+.state.taken { background: var(--sunken); color: var(--muted); }
+.state.free { background: var(--accent-soft); color: var(--accent-ink); }
+.wish-list li.is-taken > span:first-child { color: var(--muted); text-decoration: line-through; }
+
+.k-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.k-label { display: block; font-size: 0.8rem; color: var(--muted); line-height: 1.3; }
+.k-num { font-family: var(--font-mono); font-size: 1.5rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+.k-num small { font-family: var(--font-body); font-size: 0.8rem; color: var(--muted); }
+.k-live { font-size: 0.92rem; border-top: 1px solid var(--line); padding-top: 10px; }
+
+.demo { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 18px; display: grid; gap: 14px; }
+.demo-head { display: grid; gap: 4px; }
+.demo-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 22px; align-items: start; }
+@media (max-width: 800px) { .demo-grid { grid-template-columns: minmax(0, 1fr); } }
+.demo .table-wrap { border-radius: 10px; }
+.demo table { min-width: 0; font-size: 0.9rem; }
+.demo td, .demo th { padding: 7px 10px; }
+.demo td:first-child { font-weight: 500; }
+.demo input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--accent); }
+.demo select { font: inherit; font-size: 0.88rem; padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--ink); }
+.out-head { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.demo-out { list-style: none; padding: 0; display: grid; gap: 6px; }
+.demo-out li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto 52px; align-items: center; gap: 8px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+.pos { font-family: var(--font-mono); font-weight: 500; color: var(--muted); }
+.who { min-width: 0; }
+.who em { font-style: normal; font-size: 0.74rem; font-weight: 600; color: var(--accent-ink); background: var(--accent-soft); padding: 1px 6px; border-radius: 4px; margin-left: 6px; white-space: nowrap; }
+.due { font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.moved { justify-self: end; font-size: 0.74rem; font-weight: 700; }
+.moved.up { color: var(--green); background: var(--green-soft); padding: 1px 8px; border-radius: 999px; }
+
+.clock { display: grid; gap: 10px; }
+.clock-track { position: relative; height: 104px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); overflow: hidden; }
+.turn { position: absolute; top: 0; bottom: 26px; padding: 6px 8px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; border-right: 1px dashed var(--line); }
+.turn.t1 { left: 0; width: 29.17%; background: var(--accent-soft); color: var(--accent-ink); }
+.turn.t2 { left: 29.17%; width: 33.33%; background: var(--green-soft); color: var(--green); }
+.turn.t3 { left: 62.5%; width: 29.17%; background: var(--peacock-soft); color: var(--peacock); }
+.grace { position: absolute; top: 0; bottom: 26px; left: 91.67%; width: 4.17%; background: repeating-linear-gradient(135deg, var(--peacock-soft) 0 4px, transparent 4px 8px); }
+.tick { position: absolute; bottom: 32px; left: var(--x); width: 10px; height: 26px; margin-left: -5px; border-radius: 3px; background: var(--c); transition: left 0.7s ease, opacity 0.5s ease; }
+.clock.raw .tick { left: -12%; opacity: 0; }
+.raw-note { position: absolute; inset: 0 0 26px 0; display: grid; place-items: center; text-align: center; padding: 8px 16px; font-size: 0.92rem; font-weight: 600; background: var(--bg); opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
+.clock.raw .raw-note { opacity: 0.95; }
+.axis { position: absolute; left: 0; right: 0; bottom: 0; height: 26px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.axis span { position: absolute; top: 4px; transform: translateX(-50%); }
+.axis span:first-child { transform: none; padding-left: 6px; }
+.axis span:last-child { transform: translateX(-100%); padding-right: 6px; }
+.clock figcaption { font-size: 0.86rem; color: var(--muted); }
+.btn { font: inherit; font-weight: 600; font-size: 0.9rem; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--ink); background: var(--ink); color: var(--bg); cursor: pointer; justify-self: start; }
+.btn:hover { opacity: 0.88; }
+
+.ledger-visual { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; }
+.envelope { position: relative; width: 280px; max-width: 100%; aspect-ratio: 16 / 10; background: var(--paper); color: var(--paper-ink); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; flex: 0 0 auto; }
+.envelope::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 54%; background: var(--paper-flap); clip-path: polygon(0 0, 100% 0, 50% 100%); }
+.env-print { position: absolute; top: 8px; left: 0; right: 0; text-align: center; font-family: var(--font-display); font-weight: 400; font-size: 0.95rem; color: var(--paper-red); }
+.env-token { position: absolute; left: 22px; bottom: 34px; font-family: var(--font-hand); font-weight: 700; font-size: 3rem; line-height: 1; transform: rotate(-4deg); }
+.env-name { position: absolute; left: 24px; bottom: 10px; font-family: var(--font-hand); font-weight: 700; font-size: 1.1rem; transform: rotate(-2deg); }
+.coin { position: absolute; right: 18px; bottom: 16px; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: var(--paper-ink); font-weight: 700; font-size: 0.85rem; }
+.counting { flex: 1 1 280px; }
+.c-row { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding-block: 6px; border-bottom: 1px solid var(--line); }
+.c-row:last-child { border-bottom: 0; }
+.c-label { font-size: 0.8rem; color: var(--muted); }
+kbd { font-family: var(--font-mono); font-size: 0.74rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 1px 6px; color: var(--muted); }
+
+.bubble { max-width: 46ch; background: var(--green-soft); border-radius: 16px 16px 16px 4px; padding: 12px 16px; line-height: 1.5; }
+
+.glossary { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 36px; }
+@media (max-width: 760px) { .glossary { grid-template-columns: minmax(0, 1fr); } }
+.glossary div { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 10px; }
+.glossary dt { font-weight: 700; }
+.glossary dd { margin: 0; color: var(--muted); }
+
+.foot { border-top: 1px solid var(--line); padding-block: 28px; color: var(--muted); font-size: 0.86rem; }
+
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
+</style>
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Pehle Aap</a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#connections">Connections</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#features">Features</a>
+      <a href="#security">Security</a>
+      <a href="#failures">Failures</a>
+      <a href="#demo">Demo</a>
+      <a href="#plan">Plan</a>
+      <a href="#scope">Scope</a>
+      <a href="#glossary">Glossary</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-text">
+      <p class="eyebrow">Festive Hacks 2026 · Wedding season</p>
+      <h1>Pehle Aap</h1>
+      <p class="deva" lang="hi">पहले आप</p>
+      <p class="tagline">One link per guest family, from the wedding invite to the thank-you note.</p>
+      <p class="gloss">Hindi for “after you”, the polite way to offer someone your turn.</p>
+    </div>
+    <figure class="board" aria-label="Example venue TV board: token 147 on stage, next 151, 156 and 160">
+      <span class="board-label">Now on stage</span>
+      <span class="board-now">147</span>
+      <span class="board-label">Next</span>
+      <span class="board-next"><span>151</span><span>156</span><span>160</span></span>
+      <figcaption>The venue TV shows token numbers, never names.</figcaption>
+    </figure>
+    <div class="equation-block">
+      <p class="equation" aria-label="Blessing, plus envelope marked 147, plus photo, equals the same 40 seconds on stage">
+        <span class="eq-part">Blessing</span><span class="eq-op">+</span>
+        <span class="eq-part">Envelope marked <span class="hand">147</span></span><span class="eq-op">+</span>
+        <span class="eq-part">Photo</span><span class="eq-op">=</span>
+        <span class="eq-result">the same 40 seconds on stage</span>
+      </p>
+      <p class="eq-text">If the system knows which family was on stage at each moment, everything from that moment links to that family. Nobody has to type a name.</p>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="problem">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The problem</p>
+        <h2>Every wedding breaks in the same places</h2>
+      </div>
+      <p class="lead">An Indian wedding runs over several days for hundreds of guests. The family manages it through WhatsApp forwards and a paper notebook.</p>
+      <div class="phases">
+        <div class="phase">
+          <h3>Before the wedding</h3>
+          <ul>
+            <li><b>Gifts collide.</b> Nobody knows what the couple needs or what anyone else is bringing, so gifts default to safe, old-fashioned choices. The running joke is the couple who receives seven pressure cookers.</li>
+            <li><b>Headcounts are guesses.</b> RSVPs are a casual “haan, aayenge”, so the caterer guesses plates for every function. Guess high and food is wasted. Guess low and the hosts are embarrassed.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>On the day</h3>
+          <ul>
+            <li><b>The stage line.</b> Every family wants a turn on stage to bless the couple, hand over the shagun envelope and get one photo. The line routinely runs 30–60 minutes or more.</li>
+            <li><b>Everyone pays for it.</b> Elders stand through it and people cut in. Guests with a second wedding that night give up and leave. The couple stands for hours.</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <h3>After the wedding</h3>
+          <ul>
+            <li><b>Nameless photos.</b> The photographer has hundreds of stage photos and no names. Most guests never see their own photo with the couple.</li>
+            <li><b>The envelope bag.</b> Envelopes say “Sharma family” (which Sharma?) or nothing, and gift tags fall off backstage. Late at night the family writes the lena-dena diary by hand, while UPI shagun sits scattered in someone's payment history.</li>
+            <li><b>No thank-yous.</b> Nobody can face writing 400 messages.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="callout">
+        <h3>Root cause</h3>
+        <p>Every tool in the chain works on its own: the e-invite image, the WhatsApp group, the photographer's memory card, the envelope bag and the notebook. None of them knows <em>who</em> a guest is across the whole wedding, so the family connects everything by hand.</p>
+      </div>
+      <div class="block">
+        <h3>Why now</h3>
+        <p class="lead">Wedding season opens the day after Dev Uthani Ekadashi (Friday 20 November 2026). These are the most-cited muhurat dates this month:</p>
+        <ul class="date-row">
+          <li><b>21</b><span>Sat · season opens</span></li>
+          <li><b>24</b><span>Tue</span></li>
+          <li class="is-finals"><b>25</b><span>Wed · Festive Hacks finals</span></li>
+          <li><b>26</b><span>Thu</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="solution">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">The solution</p>
+        <h2>One record and one link per family</h2>
+      </div>
+      <p class="lead">Pehle Aap gives every guest family one record and one link that follow them through the whole wedding. The page behind the link changes with the date.</p>
+      <ol class="journey">
+        <li class="j-phase">
+          <span class="j-label">Before the wedding</span>
+          <ol>
+            <li><b>Invite link</b><span>Shared in the family WhatsApp group</span></li>
+            <li><b>RSVP per function</b><span>How many are coming to each event</span></li>
+            <li><b>Claim a gift</b><span>Locked for everyone else</span></li>
+          </ol>
+        </li>
+        <li class="j-phase">
+          <span class="j-label">On the day</span>
+          <ol>
+            <li><b>Arrive, get token 147</b><span>Go eat, the phone will call you</span></li>
+            <li class="is-key"><b>Turn on stage</b><span>Blessing, envelope and photo</span></li>
+          </ol>
+        </li>
+        <li class="j-phase">
+          <span class="j-label">After the wedding</span>
+          <ol>
+            <li><b>Named photos</b><span>Matched by stage time</span></li>
+            <li><b>Ledger row</b><span>Gift, cash and UPI under one name</span></li>
+            <li><b>Thank-you with photos</b><span>One tap per family</span></li>
+          </ol>
+        </li>
+      </ol>
+
+      <div class="block">
+        <h3>What it does</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Problem</th><th>Feature</th><th>How it's solved</th></tr></thead>
+            <tbody>
+              <tr><td>Duplicate, unwanted gifts</td><td>Gift wishlist on the invite</td><td>The couple lists what they need. When a guest claims an item, it's locked for everyone else. Other guests only see “taken”.</td></tr>
+              <tr><td>Caterer guesses plates</td><td>Plate counts</td><td>Planned plates per function come from RSVPs plus a safety margin. On the day, the QR check-in that issues stage tokens also gives the kitchen a live arrival count.</td></tr>
+              <tr><td>The stage line</td><td>Token queue</td><td>Families check in, get a token and an estimated wait, and go eat. Their phone tells them when to come. Elders and early leavers move up, and nobody waits forever.</td></tr>
+              <tr><td>Nameless stage photos</td><td>Photos that name themselves</td><td>One photo of a QR clock corrects each camera's clock. Each photo is then matched to the family that was on stage at that second. No face recognition.</td></tr>
+              <tr><td>The envelope bag</td><td>Self-filling ledger</td><td>Guests write their token on the envelope, the gift tag and the UPI note. On counting night you type “147 → ₹2,101”. Wishlist claims are added automatically.</td></tr>
+              <tr><td>No thank-yous</td><td>One-tap thank-you notes</td><td>Each tap opens WhatsApp with a personal message that names the family's gift and links to their stage photos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>How it's different</h3>
+        <div class="grid-2">
+          <div class="item"><h4>A ledger that fills itself</h4><p>A shagun ledger normally needs someone to type every name. This one fills itself from the stage.</p></div>
+          <div class="item"><h4>Names without faces</h4><p>Wedding photo apps such as Kamero and Samaro use face recognition so guests can find their own photos. Pehle Aap tells the couple who is in every stage photo, using only time.</p></div>
+          <div class="item"><h4>An invite that becomes a pass</h4><p>An e-invite is usually a static image or video. Here it's the guest's pass for the whole wedding.</p></div>
+          <div class="item"><h4>Nothing to install</h4><p>Guests need one link and one QR code.</p></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Who uses it</h3>
+        <div class="grid-3">
+          <div class="item"><h4>Couple / host</h4><p>Phone or laptop. A dashboard for functions, wishlist, RSVPs, plate counts, album, ledger, thank-yous and the role links.</p></div>
+          <div class="item"><h4>Guest family</h4><p>Their own phone, no install. Before: invite, RSVP and wishlist. On the day: token and place in line. After: their photos.</p></div>
+          <div class="item"><h4>Stage manager</h4><p>Usually a cousin, on a phone or tablet. Calls the next family, skips, pauses, adds walk-ins and shows the QR clock.</p></div>
+          <div class="item"><h4>Photographer</h4><p>Laptop. Uploads one camera's folder at a time. The clock correction is automatic.</p></div>
+          <div class="item"><h4>Caterer</h4><p>Phone. Plates per function, and live arrivals on the day.</p></div>
+          <div class="item"><h4>Venue TV</h4><p>Any browser. The number on stage and the next few numbers. No names.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="connections">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">How the pieces connect</p>
+        <h2>Four things carry a family through the wedding</h2>
+      </div>
+      <div class="grid-4">
+        <div class="carrier"><h4>Family record</h4><span class="sample">Gupta family · groom's side</span><p>Created at RSVP, or at the door for walk-ins. Holds name, phone, side, and whether elders are with them.</p></div>
+        <div class="carrier"><h4>Family link</h4><span class="sample">/f/Xq3Rk9…</span><p>One link before, during and after. Before: invite, RSVP, wishlist. On the day: “We've arrived”, token, queue. After: photos.</p></div>
+        <div class="carrier"><h4>Token number</h4><span class="sample token">147</span><p>Assigned at first check-in. It's what people use: on the venue TV, envelopes, gift tags, UPI notes and the counting screen.</p></div>
+        <div class="carrier"><h4>Stage time</h4><span class="sample">Call 147 · 9:14:00 pm</span><p>The stage phone stamps every call. Its clock is the event's single timeline, and every photo's time is converted to it.</p></div>
+      </div>
+
+      <div class="block">
+        <h3>What links through what</h3>
+        <ul class="linkmap">
+          <li><span class="chip">Wishlist claim</span><span class="to">→</span><span class="chip family">Gupta family</span><span class="note-inline">linked directly</span></li>
+          <li><span class="chip">Envelope</span><span class="chip">Gift tag</span><span class="chip">UPI note</span><span class="to">→</span><span class="chip token">147</span><span class="to">→</span><span class="chip family">Gupta family</span></li>
+          <li><span class="chip">Stage photo</span><span class="to">→</span><span class="chip">Stage time</span><span class="to">→</span><span class="chip">Turn</span><span class="to">→</span><span class="chip family">Gupta family</span></li>
+          <li><span class="chip family">Gupta family</span><span class="to">→</span><span class="chip ledger">Ledger row</span><span class="note-inline">everything attached, nothing typed</span></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>The stage moment, end to end</h3>
+        <ol class="seq">
+          <li><span class="actor a-guest">Guest</span><span class="to">→</span><span class="actor a-server">Server</span><span class="msg">“We've arrived”</span></li>
+          <li><span class="actor a-server">Server</span><span class="to">→</span><span class="actor a-guest">Guest</span><span class="msg">Token 147, 12th in line, about 25 min</span></li>
+          <li><span class="actor a-stage">Stage manager</span><span class="to">→</span><span class="actor a-server">Server</span><span class="msg">Call next family, stamped with the stage phone's time</span></li>
+          <li><span class="actor a-server">Server</span><span class="to">→</span><span class="actor a-guest">Guest</span><span class="msg">Push: you're 3rd, head to the stage</span></li>
+          <li><span class="actor a-stage">Stage manager</span><span class="to">→</span><span class="actor a-server">Server</span><span class="msg">Call 147</span></li>
+          <li><span class="actor a-server">Server</span><span class="to">→</span><span class="actor a-guest">Guest</span><span class="msg">Push: you're on</span></li>
+          <li class="moment"><span class="msg">On stage: blessing, envelope marked 147 and photos, all in the same 40 seconds</span></li>
+          <li><span class="actor a-photo">Photographer</span><span class="to">→</span><span class="actor a-server">Server</span><span class="msg">Upload a camera folder: camera times and the QR clock photo</span></li>
+          <li><span class="actor a-server">Server</span><span class="msg">Corrects the camera clock and matches photos to turns</span></li>
+          <li><span class="actor a-server">Server</span><span class="to">→</span><span class="actor a-guest">Guest</span><span class="msg">“Your stage photos are ready”</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="architecture">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Architecture</p>
+        <h2>Phones, one app, one database</h2>
+      </div>
+      <div class="arch">
+        <div class="tier">
+          <span class="tier-label">Phones and screens</span>
+          <ul class="tier-boxes">
+            <li><b>Guest family</b><span>Invite, RSVP, wishlist, token, photos</span></li>
+            <li><b>Stage manager</b><span>Queue, walk-ins, QR clock</span></li>
+            <li><b>Photographer laptop</b><span>Reads times, finds QR, resizes</span></li>
+            <li><b>Couple</b><span>Dashboard, ledger, thank-yous</span></li>
+            <li><b>Caterer</b><span>Plate counts</span></li>
+            <li><b>Venue TV</b><span>Number on stage</span></li>
+          </ul>
+        </div>
+        <div class="arch-arrow" aria-hidden="true">→</div>
+        <div class="tier">
+          <span class="tier-label">App</span>
+          <div class="box box-strong"><b>Next.js on Vercel</b><span>Pages, server actions and three small JSON endpoints</span></div>
+        </div>
+        <div class="arch-arrow" aria-hidden="true">→</div>
+        <div class="tier">
+          <span class="tier-label">Data</span>
+          <div class="box"><b>Supabase Postgres</b><span>Server-only: Row Level Security on, no rules</span></div>
+          <div class="box"><b>Supabase Storage</b><span>Private photo bucket, signed links</span></div>
+        </div>
+      </div>
+
+      <div class="block">
+        <h4>Paths that skip the app server</h4>
+        <ul class="bypass">
+          <li><span class="chip">Photographer</span><span class="to">→</span><span class="chip">Storage</span><span class="note-inline">Resized photos go straight up through a signed upload URL, because Vercel caps request bodies at 4.5 MB</span></li>
+          <li><span class="chip">Server</span><span class="to">→</span><span class="chip">Guest phone</span><span class="note-inline">Web Push when their turn is close</span></li>
+          <li><span class="chip">Couple</span><span class="to">→</span><span class="chip">WhatsApp</span><span class="note-inline"><code>wa.me</code> links for invites and thank-yous</span></li>
+          <li><span class="chip">Guest</span><span class="to">→</span><span class="chip">UPI app</span><span class="note-inline"><code>upi://</code> link with the token in the note</span></li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Design principles</h3>
+        <ul class="points">
+          <li><b>The browser does the heavy lifting.</b> Reading photo timestamps, decoding the QR clock and resizing photos happen on the photographer's laptop. The server stores small metadata and does the matching.</li>
+          <li><b>The database is never exposed.</b> All reads and writes go through server code. Row Level Security is on with no rules, so even Supabase's public key can't read or write a row.</li>
+          <li><b>Polling, not websockets.</b> Banquet halls have poor signal. An open page asks for an update every 5 seconds, and a phone in a pocket gets push notifications. A dropped connection just means the next request catches up.</li>
+          <li><b>No accounts.</b> Each role and each family gets an unguessable link. Guests live in WhatsApp, and a sign-up screen would lose most of them.</li>
+          <li><b>No money, no faces.</b> UPI payments happen in the guest's own app, and photos are matched by time, not biometrics.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h3>Tech stack</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Layer</th><th>Choice</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td>App</td><td>Next.js (App Router) + TypeScript</td><td>Pages, server actions and API routes in one deployment. <code>next/og</code> draws the invite's WhatsApp preview card.</td></tr>
+              <tr><td>UI</td><td>Tailwind CSS</td><td>Quick to style and mobile-first by default.</td></tr>
+              <tr><td>Database</td><td>Supabase Postgres</td><td>Real SQL. Gift claims and token numbers are safe in one statement, and per-function totals are one query.</td></tr>
+              <tr><td>Photo storage</td><td>Supabase Storage, private bucket</td><td>Signed upload URLs let the browser upload directly, since Vercel functions cap request bodies at 4.5 MB.</td></tr>
+              <tr><td>Hosting</td><td>Vercel</td><td>No setup for Next.js, plus the HTTPS that service workers and push notifications need.</td></tr>
+              <tr><td>Photo timestamps</td><td>exifr, in the browser</td><td>Reads only the start of each file, so a folder of 20 MB JPEGs is read in seconds.</td></tr>
+              <tr><td>QR reading</td><td>jsQR, in the browser</td><td>Finds the clock QR in the calibration photo.</td></tr>
+              <tr><td>QR generation</td><td>qrcode</td><td>The entrance QR, the TV board QR and the stage QR clock.</td></tr>
+              <tr><td>Resizing</td><td>Canvas, built into browsers</td><td>No library needed.</td></tr>
+              <tr><td>Notifications</td><td>Web Push API + service worker, web-push on the server</td><td>Guests go and eat while their phone tells them when to come. No app to install.</td></tr>
+              <tr><td>Live updates</td><td><code>fetch</code> every 5 s while the page is visible</td><td>Works on bad venue networks, with no websocket server to run.</td></tr>
+              <tr><td>WhatsApp</td><td><code>wa.me</code> click-to-chat links</td><td>Sent from the couple's own number, with no API approval needed.</td></tr>
+              <tr><td>UPI</td><td><code>upi://pay</code> links and the couple's UPI QR</td><td>Money never passes through the app.</td></tr>
+              <tr><td>Tests</td><td>Node's built-in test runner + Playwright</td><td>Unit tests for the queue and the photo matcher, plus one end-to-end journey.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="block">
+        <h3>Data model</h3>
+        <p class="lead">Nine tables. Everything hangs off <code>family</code>.</p>
+        <div class="grid-3 tables-grid">
+          <div class="item"><h4>wedding</h4><p>Couple, UPI ID, token counter, plate margin and the role links.</p></div>
+          <div class="item"><h4>event</h4><p>One per function. Whether it has a stage, and when the couple tapped Start.</p></div>
+          <div class="item"><h4>family</h4><p>One per guest family: link, side, elders, token, and the ledger amounts.</p></div>
+          <div class="item"><h4>rsvp</h4><p>Headcount per family per function.</p></div>
+          <div class="item"><h4>checkin</h4><p>On the day: arrived, leaving by, called, skipped, push subscription.</p></div>
+          <div class="item"><h4>stage_log</h4><p>Every call, skip, pause and resume, stamped by the stage phone. Safe to replay after the network drops.</p></div>
+          <div class="item"><h4>gift</h4><p>Wishlist items and who claimed them.</p></div>
+          <div class="item"><h4>batch</h4><p>One camera's upload and its clock offset.</p></div>
+          <div class="item"><h4>photo</h4><p>The camera's own time and the matched family.</p></div>
+        </div>
+        <details>
+          <summary>Show the full SQL</summary>
+<pre><code>create table wedding (
+  id            uuid primary key default gen_random_uuid(),
+  slug          text unique not null,               -- /i/riya-weds-arjun
+  couple        text not null,
+  upi_id        text,                               -- where UPI shagun goes
+  next_number   int not null default 101,           -- token counter
+  plate_margin  numeric not null default 0.10,      -- caterer safety margin, set by the couple
+  host_key      text unique not null,               -- role links: 16 random bytes, base64url
+  stage_key     text unique not null,
+  upload_key    text unique not null,
+  kitchen_key   text unique not null
+);
+
+create table event (                                -- one per function: Haldi, Sangeet, Reception...
+  id          uuid primary key default gen_random_uuid(),
+  wedding_id  uuid not null references wedding on delete cascade,
+  name        text not null,
+  starts_at   timestamptz not null,
+  venue       text,
+  map_url     text,
+  has_stage   boolean not null default false,       -- runs the token queue
+  started_at  timestamptz                           -- couple tapped "Start": the day-of view goes live
+);
+
+create table family (
+  id          uuid primary key default gen_random_uuid(),
+  wedding_id  uuid not null references wedding on delete cascade,
+  link_key    text unique not null,                 -- /f/&lt;link_key&gt;
+  name        text not null,
+  phone       text,
+  side        text check (side in ('bride', 'groom')),
+  elders      boolean not null default false,       -- someone 75+: earlier due time in the queue
+  number      int,                                  -- token, assigned at first check-in
+  cash        int,                                  -- ledger, filled in on counting night
+  upi         int,
+  boxed_gift  text,
+  thanked_at  timestamptz,
+  unique (wedding_id, phone),
+  unique (wedding_id, number)
+);
+
+create table rsvp (
+  family_id  uuid references family on delete cascade,
+  event_id   uuid references event on delete cascade,
+  headcount  int not null check (headcount &gt;= 0),
+  primary key (family_id, event_id)
+);
+
+create table checkin (                              -- on the day: one row per family per function
+  family_id   uuid references family on delete cascade,
+  event_id    uuid references event on delete cascade,
+  headcount   int not null,
+  arrived_at  timestamptz not null default now(),
+  leave_by    timestamptz,                          -- "we must leave by 10:30"
+  in_line     boolean not null default true,        -- wants to go on stage
+  called_at   timestamptz,                          -- stage device clock
+  skipped     boolean not null default false,
+  push        jsonb,                                -- Web Push subscription
+  primary key (family_id, event_id)
+);
+
+create table stage_log (                            -- append-only, so an offline stage screen can replay it
+  id         uuid primary key,                      -- made on the device, so retries are harmless
+  event_id   uuid not null references event on delete cascade,
+  at         timestamptz not null,                  -- stage device clock: the event's one timeline
+  action     text not null check (action in ('call', 'skip', 'pause', 'resume')),
+  family_id  uuid references family
+);
+
+create table gift (
+  id          uuid primary key default gen_random_uuid(),
+  wedding_id  uuid not null references wedding on delete cascade,
+  name        text not null,
+  link        text,
+  price_band  text,
+  claimed_by  uuid references family on delete set null,
+  claimed_at  timestamptz
+);
+
+create table batch (                                -- one camera's upload
+  id         uuid primary key default gen_random_uuid(),
+  event_id   uuid not null references event on delete cascade,
+  camera     text,
+  offset_ms  bigint                                 -- stage clock minus camera clock
+);
+
+create table photo (
+  id         uuid primary key default gen_random_uuid(),
+  batch_id   uuid not null references batch on delete cascade,
+  path       text not null,                         -- object in the private photos bucket
+  camera_at  timestamp not null,                    -- the camera's own clock, as recorded, no time zone
+  family_id  uuid references family on delete set null
+);</code></pre>
+        </details>
+      </div>
+
+      <div class="block">
+        <h3>Pages and routes</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Route</th><th>Who</th><th>What</th></tr></thead>
+            <tbody>
+              <tr><td><code>/i/&lt;slug&gt;</code></td><td>Anyone with the invite</td><td>The invite and RSVP sign-up</td></tr>
+              <tr><td><code>/f/&lt;key&gt;</code></td><td>One family</td><td>RSVP, wishlist, check-in, token and queue, UPI shagun, photos</td></tr>
+              <tr><td><code>/here/&lt;slug&gt;</code></td><td>Entrance QR</td><td>Walk-in check-in</td></tr>
+              <tr><td><code>/stage/&lt;key&gt;</code></td><td>Stage manager</td><td>Queue controls, walk-ins, QR clock</td></tr>
+              <tr><td><code>/upload/&lt;key&gt;</code></td><td>Photographer</td><td>Folder upload with clock correction</td></tr>
+              <tr><td><code>/kitchen/&lt;key&gt;</code></td><td>Caterer</td><td>Plates per function, live arrivals</td></tr>
+              <tr><td><code>/board/&lt;slug&gt;</code></td><td>Venue TV</td><td>The number on stage and the next numbers, no names</td></tr>
+              <tr><td><code>/host/&lt;key&gt;</code></td><td>Couple</td><td>Functions, wishlist, families, RSVPs, album, counting screen, ledger, thank-yous, role links</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small">All changes go through Next.js server actions. The only JSON endpoints are the polled status (<code>/api/status/&lt;key&gt;</code>), the TV board feed, and saving a push subscription.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Features</p>
+        <h2>How each feature works</h2>
+      </div>
+      <nav class="feature-index" aria-label="Features">
+        <a class="chip" href="#invite">Invite and RSVP</a>
+        <a class="chip" href="#wishlist">Gift wishlist</a>
+        <a class="chip" href="#plates">Plate counts</a>
+        <a class="chip" href="#queue">Token queue</a>
+        <a class="chip" href="#photos">Named photos</a>
+        <a class="chip" href="#ledger">Ledger</a>
+        <a class="chip" href="#thanks">Thank-yous</a>
+      </nav>
+
+      <div class="features">
+        <article class="feature" id="invite">
+          <div class="feature-head">
+            <p class="phase-tag">Before the wedding</p>
+            <h3>Digital invite and RSVP</h3>
+          </div>
+          <ul class="points">
+            <li><b>Setup.</b> The couple adds their names, a photo, the functions (date, time, venue, map link), the UPI ID for shagun, and the wishlist.</li>
+            <li><b>Shared link.</b> Most guests come in through <code>/i/&lt;slug&gt;</code>, posted in family WhatsApp groups. They enter family name, phone and side, and land on their personal family link. The device remembers it, and the page tells them it's their pass on the wedding day.</li>
+            <li><b>Added by hand.</b> The couple can add a family themselves, such as grandparents without smartphones, and send their link with one tap through <code>wa.me</code>.</li>
+            <li><b>RSVP per function.</b> “How many of you are coming to the Sangeet? The reception?” One extra question feeds the queue: “Is anyone 75 or older?” Answers can change at any time.</li>
+            <li><b>One registration per number.</b> If a number is already registered, the page points to the original link, which the couple can resend. Typing someone else's number never opens their page.</li>
+            <li><b>Looks like a card on WhatsApp.</b> <code>next/og</code> generates the preview image from the couple's names, date and photo. Keep it small, because WhatsApp skips large preview images.</li>
+          </ul>
+        </article>
+
+        <article class="feature" id="wishlist">
+          <div class="feature-head">
+            <p class="phase-tag">Before the wedding</p>
+            <h3>Gift wishlist</h3>
+          </div>
+          <div class="mock" aria-label="Example wishlist">
+            <div class="mock-head"><span>Wishlist on the invite</span><span class="ex">Example</span></div>
+            <ul class="wish-list">
+              <li><span>Shagun (cash or UPI)</span><span class="state open">Always open</span></li>
+              <li class="is-taken"><span>Air fryer<small>₹5–8k</small></span><span class="state taken">Taken</span></li>
+              <li><span>Coffee machine<small>₹8k+</small></span><span class="state free">Available</span></li>
+              <li><span>Luggage set<small>₹5–8k</small></span><span class="state free">Available</span></li>
+            </ul>
+          </div>
+          <ul class="points">
+            <li><b>Shagun first.</b> “Shagun (cash or UPI)” is always the first option, so the list reads as a suggestion, never a demand. A list of “required” items on an Indian wedding invite can look like a dowry list, so the product never uses that word.</li>
+            <li><b>Privacy.</b> Guests see each item as available or taken, never who took it.</li>
+            <li><b>Claims can't collide.</b> Claiming is one atomic statement, so two guests tapping the same item at the same moment can't both win.</li>
+          </ul>
+<pre><code>update gift set claimed_by = $family, claimed_at = now()
+where id = $gift and claimed_by is null
+returning id;   -- no row back: someone else got there first, so show "just taken"</code></pre>
+          <ul class="points">
+            <li><b>Two of something?</b> List it twice, so each claim still locks one row.</li>
+            <li><b>Releasing claims.</b> Guests can un-claim their own item. The couple can release any claim, for the guest who claimed and never bought.</li>
+            <li><b>Feeds the ledger.</b> Claims appear under that family automatically. Even if the tag falls off the box backstage, the couple knows who brought the air fryer.</li>
+          </ul>
+        </article>
+
+        <article class="feature" id="plates">
+          <div class="feature-head">
+            <p class="phase-tag">Before and on the day</p>
+            <h3>Plate counts for the caterer</h3>
+          </div>
+          <div class="mock" aria-label="Example kitchen view">
+            <div class="mock-head"><span>Kitchen view · Reception</span><span class="ex">Example</span></div>
+            <div class="k-row">
+              <div><span class="k-label">Confirmed</span><span class="k-num">412</span></div>
+              <div><span class="k-label">Not answered</span><span class="k-num">38 <small>families</small></span></div>
+              <div><span class="k-label">Order (+10%)</span><span class="k-num">454</span></div>
+            </div>
+            <p class="k-live"><b>Live:</b> 310 arrived · 45 in the last 15 minutes</p>
+          </div>
+          <ul class="points">
+            <li><b>Before the day.</b> For each function: confirmed headcount, families who haven't answered, and a suggested order of confirmed × (1 + margin). The couple sets the margin (10% by default), because every family's “haan, aayenge” means something different.</li>
+            <li><b>On the day.</b> Every check-in records how many people actually came. The kitchen sees arrivals against the plan and the last 15 minutes, so it can see a rush coming. It's a minimum, because guests who never check in aren't counted.</li>
+            <li><b>One scan, two jobs.</b> The QR check-in that gives a family its stage token also updates the kitchen's count.</li>
+          </ul>
+<pre><code>select e.name,
+       sum(r.headcount)                               as confirmed,
+       ceil(sum(r.headcount) * (1 + w.plate_margin))  as plates_to_order
+from rsvp r
+join event e   on e.id = r.event_id
+join wedding w on w.id = e.wedding_id
+where w.id = $wedding
+group by e.id, w.id
+order by e.starts_at;</code></pre>
+        </article>
+
+        <article class="feature" id="queue">
+          <div class="feature-head">
+            <p class="phase-tag">On the day</p>
+            <h3>Check-in and the token queue</h3>
+          </div>
+          <div class="sub">
+            <h4>Arriving</h4>
+            <ul class="points">
+              <li><b>Families with a link</b> tap “We've arrived”, confirm how many came, and can add “we must leave by 10:30”.</li>
+              <li><b>Walk-ins</b> scan the entrance QR (<code>/here/&lt;slug&gt;</code>) and enter family name, side and headcount. If the phone number matches a registered family, that family is checked in, and this phone shows only their token and place in line, not the full family page.</li>
+              <li><b>Guests without a smartphone</b> are added by the stage manager, who tells them their number.</li>
+              <li><b>Token numbers never repeat.</b> They come from an atomic counter, so two families checking in at the same second never share a number.</li>
+            </ul>
+<pre><code>update wedding set next_number = next_number + 1
+where id = $wedding
+returning next_number - 1 as number;   -- the row lock lines up simultaneous check-ins</code></pre>
+          </div>
+
+          <div class="sub">
+            <h4>Who goes next: the due-time rule</h4>
+            <p class="lead">Every family in line gets a due time, which is when they should ideally be on stage. The stage serves the earliest due time first.</p>
+<pre><code>const MIN = 60_000;
+const DUE = { regular: 45, elder: 15, leaveBuffer: 10 }; // minutes; tune after the first real wedding
+
+type InLine = { arrivedAt: Date; elders: boolean; leaveBy?: Date };
+
+// Never earlier than arrival, so a family can only be overtaken by people who arrived before its due time.
+function due(f: InLine) {
+  const t = f.arrivedAt.getTime();
+  const options = [t + DUE.regular * MIN];
+  if (f.elders) options.push(t + DUE.elder * MIN);
+  if (f.leaveBy) options.push(f.leaveBy.getTime() - DUE.leaveBuffer * MIN);
+  return Math.max(t, Math.min(...options));
+}
+
+export const order = &lt;T extends InLine&gt;(line: T[]) =&gt;
+  [...line].sort((a, b) =&gt; due(a) - due(b) || +a.arrivedAt - +b.arrivedAt);</code></pre>
+
+            <div class="demo">
+              <div class="demo-head">
+                <h4>Try the rule</h4>
+                <p class="muted small">Example families on a reception evening. Tick 75+ or set a leaving time and the line reorders using the same function as above.</p>
+              </div>
+              <div class="demo-grid">
+                <div class="table-wrap">
+                  <table>
+                    <thead><tr><th>Family</th><th>Arrived</th><th>75+</th><th>Leaves by</th></tr></thead>
+                    <tbody id="qd-in"></tbody>
+                  </table>
+                </div>
+                <div>
+                  <p class="out-head">Order on the stage screen</p>
+                  <ol class="demo-out" id="qd-out" aria-live="polite"></ol>
+                </div>
+              </div>
+              <p class="muted small">“Up” counts the places a family gains over plain arrival order.</p>
+            </div>
+
+            <ul class="points">
+              <li><b>Regular families</b> all get the same 45 minutes, so among themselves it's plain first come, first served.</li>
+              <li><b>Elders.</b> Nanaji's family arrives at 8:20 and is due at 8:35. They go ahead of regular families who arrived after 7:50, and behind everyone who arrived earlier.</li>
+              <li><b>Early leavers.</b> A family that arrives at 9:10 and must leave by 9:40 is due at 9:30. They go ahead of regular families who arrived after 8:45.</li>
+              <li><b>Nobody waits forever.</b> A due time is never earlier than the arrival time, so a family due at 9:00 can only be overtaken by families that arrived before 9:00. That group is finite, so every family gets called.</li>
+              <li><b>Human override.</b> The stage manager can call any family directly (the grandparents, the boss) and can see who flagged themselves, which keeps the “leaving soon” flag honest.</li>
+            </ul>
+          </div>
+
+          <div class="sub">
+            <h4>Estimated wait</h4>
+            <p style="max-width: var(--measure)">The time left in the current turn, plus the expected stage time of every family ahead. Expected stage time is <i>a</i> + <i>b</i> × headcount: a fixed part for greeting the couple and the envelope, and a part per person for fitting everyone into the photo. <i>a</i> and <i>b</i> are fitted by least squares from finished turns, starting at 30 s and 8 s so the first estimates make sense. The page shows “12th in line, about 25 min”, or “stage paused” during a break.</p>
+          </div>
+
+          <div class="sub">
+            <h4>Telling families when to come</h4>
+            <p style="max-width: var(--measure)">When the stage manager taps “Call next”, the called family gets “You're on!” and the family now third in line gets “Head towards the stage”. These go out as push notifications, which work in Chrome on Android, and on iPhone only once the page is added to the home screen. They also show on the page if it's open, and the venue TV shows the numbers for everyone else, along with the entrance QR for late arrivals.</p>
+          </div>
+
+          <div class="sub">
+            <h4>The stage screen</h4>
+            <ul class="points">
+              <li><b>Call next.</b> A big button, with the next five families and their flags underneath.</li>
+              <li><b>Skip.</b> For a family that isn't there. They stay one tap away in a Skipped list, and the skipped call doesn't count as a turn.</li>
+              <li><b>Pause and Resume</b> for the couple's dinner break, plus <b>Add walk-in</b> and <b>Show QR clock</b>.</li>
+              <li><b>Works offline.</b> Every action is a <code>stage_log</code> row with an ID made on the device and the device's time. If the hall's network drops, actions wait on the device and are sent later. The ID means a resend can't create duplicates, and the order is kept.</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="feature" id="photos">
+          <div class="feature-head">
+            <p class="phase-tag">On the day and after</p>
+            <h3>Photos that name themselves</h3>
+          </div>
+
+          <figure class="clock" id="clock">
+            <div class="clock-track">
+              <div class="turn t1">147 · Gupta</div>
+              <div class="turn t2">151 · Iyer</div>
+              <div class="turn t3">156 · Reddy</div>
+              <div class="grace"></div>
+              <span class="tick" style="--x: 6.25%; --c: var(--accent)"></span>
+              <span class="tick" style="--x: 16.67%; --c: var(--accent)"></span>
+              <span class="tick" style="--x: 25.83%; --c: var(--accent)"></span>
+              <span class="tick" style="--x: 37.5%; --c: var(--green)"></span>
+              <span class="tick" style="--x: 49.17%; --c: var(--green)"></span>
+              <span class="tick" style="--x: 58.75%; --c: var(--green)"></span>
+              <span class="tick" style="--x: 71.67%; --c: var(--peacock)"></span>
+              <span class="tick" style="--x: 83.33%; --c: var(--peacock)"></span>
+              <span class="tick" style="--x: 93.75%; --c: var(--peacock)"></span>
+              <span class="tick" style="--x: 98.33%; --c: var(--muted)"></span>
+              <div class="raw-note">The camera says 7:11 to 7:14 pm. Nobody was on stage then, so no photo matches.</div>
+              <div class="axis"><span style="left: 0%">9:14</span><span style="left: 25%">9:15</span><span style="left: 50%">9:16</span><span style="left: 75%">9:17</span><span style="left: 100%">9:18</span></div>
+            </div>
+            <figcaption>Example: three turns on the stage clock between 9:14 and 9:18 pm. Each bar is a photo. The couple paused at 9:17:40; the hatched strip is the 10-second grace, and the grey photo after it stays unmatched.</figcaption>
+          </figure>
+          <button type="button" class="btn" id="clock-toggle" aria-pressed="false">Show the camera's own times</button>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Photo</th><th>Camera says</th><th>Stage clock</th><th>Matched to</th></tr></thead>
+              <tbody>
+                <tr><td>DSC_0401.JPG (QR clock)</td><td class="num">7:05:41 pm</td><td class="num">QR reads 9:08:53 pm</td><td>Offset: camera is 2 h 3 min 12 s behind</td></tr>
+                <tr><td>DSC_0412.JPG</td><td class="num">7:11:03 pm</td><td class="num">9:14:15 pm</td><td>147 · Gupta</td></tr>
+                <tr><td>DSC_0418.JPG</td><td class="num">7:12:18 pm</td><td class="num">9:15:30 pm</td><td>151 · Iyer</td></tr>
+                <tr><td>DSC_0431.JPG</td><td class="num">7:14:33 pm</td><td class="num">9:17:45 pm</td><td>156 · Reddy, inside the grace after the pause</td></tr>
+                <tr><td>DSC_0432.JPG</td><td class="num">7:14:44 pm</td><td class="num">9:17:56 pm</td><td>Unmatched (the couple's break)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <ol class="steps">
+            <li><div><p><b>Calibrate.</b> Before the line opens, the photographer uses each camera to photograph the QR clock on the stage screen. The QR holds the stage phone's current time, with large digits underneath as a fallback.</p></div></li>
+            <li><div><p><b>Upload.</b> Afterwards, or during a break, the photographer opens <code>/upload/&lt;key&gt;</code> on a laptop and picks one camera's folder.</p></div></li>
+            <li><div><p><b>Read and correct, in the browser.</b> exifr reads each JPEG's capture time (<code>DateTimeOriginal</code>) and jsQR finds the clock in the earliest photos. The page reports something like “This camera is 2 h 3 min behind.”</p>
+<pre><code>// Read the camera's time as a plain number, as if it were UTC.
+// One subtraction then covers clock drift, a wrong time zone and daylight saving.
+const offsetMs = qrTimeMs - cameraMs(qrShot);
+
+function familyFor(photo: Photo, turns: Turn[]) {
+  const t = cameraMs(photo) + offsetMs;            // now on the stage clock
+  return turns.find(s =&gt; s.start &lt;= t &amp;&amp; t &lt; s.end)?.familyId ?? null;
+}</code></pre></div></li>
+            <li><div><p><b>Resize and upload directly.</b> The browser resizes each photo to 2,048 px on the long edge, so a 1,000-photo reception is about 400 MB instead of about 10 GB. Photos go straight to Supabase Storage through signed upload URLs. The photographer still delivers full-resolution originals separately.</p></div></li>
+            <li><div><p><b>Match.</b> A turn runs from one “call” to the next, or to a “pause” plus 10 seconds of grace for the “ek aur photo” uncle. A skipped call creates no turn. Photos outside every turn, such as décor or the couple alone, stay unmatched.</p></div></li>
+            <li><div><p><b>Deliver.</b> Family pages switch to “Your stage photos are ready”. The couple's album is searchable by name, with an unmatched pile and a way to move a photo to the right family.</p></div></li>
+          </ol>
+          <ul class="points">
+            <li><b>Precision.</b> Corrected timestamps are accurate to about a second, and a turn lasts 30–90 seconds, which leaves plenty of margin.</li>
+            <li><b>Forgot the QR photo?</b> Tap any photo and pick the family in it. The offset then comes from the middle of that family's turn, which can be off by up to half a turn, so moving stray photos matters more.</li>
+            <li><b>JPEG only in v1.</b> Professional cameras can save a JPEG alongside RAW, and an iPhone can be set to “Most Compatible”.</li>
+          </ul>
+        </article>
+
+        <article class="feature" id="ledger">
+          <div class="feature-head">
+            <p class="phase-tag">After the wedding</p>
+            <h3>The self-filling ledger</h3>
+          </div>
+          <div class="ledger-visual">
+            <div class="envelope" role="img" aria-label="Shagun envelope with 147 and Gupta family handwritten on it, and a one-rupee coin">
+              <span class="env-print" lang="hi">शुभ विवाह</span>
+              <span class="env-token">147</span>
+              <span class="env-name">Gupta family</span>
+              <span class="coin">₹1</span>
+            </div>
+            <div class="mock counting" aria-label="Example counting screen">
+              <div class="mock-head"><span>Counting screen</span><span class="ex">Example</span></div>
+              <div class="c-row"><span class="c-label">Token</span><span class="mono">147</span></div>
+              <div class="c-row"><span class="c-label">Family</span><span>Gupta family · groom's side</span></div>
+              <div class="c-row"><span class="c-label">Cash</span><span class="mono">₹2,101</span><kbd>Enter</kbd></div>
+            </div>
+          </div>
+          <ul class="points">
+            <li><b>Wishlist claims</b> are added automatically.</li>
+            <li><b>Envelopes and gift boxes.</b> While a family waits, their page says “Write 147 on your envelope and gift tag”. On counting night, type the token, check the family name the screen shows, then type the amount or describe the gift. It's keyboard only, and Enter moves to the next envelope.</li>
+            <li><b>No token on the envelope?</b> Search by name, or file it under “unknown”.</li>
+            <li><b>UPI shagun.</b> A “Give shagun by UPI” button opens the guest's UPI app with the note filled in: <code>upi://pay?pa=&lt;couple's UPI ID&gt;&amp;pn=&lt;names&gt;&amp;tn=147-Gupta&amp;cu=INR</code>. Where that doesn't open an app (some iPhones), the page shows the UPI ID with a copy button and “add 147 to the note”. The same rule works for a UPI QR stand by the stage.</li>
+            <li><b>What comes out.</b> One row per family with side, functions attended, when they met the couple, photos, wishlist gift, gift box, cash, UPI and whether they've been thanked. Totals by side, and a CSV export. It's the digital lena-dena diary, ready for when the Guptas host a wedding of their own.</li>
+          </ul>
+        </article>
+
+        <article class="feature" id="thanks">
+          <div class="feature-head">
+            <p class="phase-tag">After the wedding</p>
+            <h3>One-tap thank-you notes</h3>
+          </div>
+          <p class="bubble">Dear Gupta family, thank you for blessing us, and for the lovely air fryer! Here are your photos with us: /f/Xq3Rk9…<br>Love, Riya &amp; Arjun</p>
+          <ul class="points">
+            <li><b>Filled in for each family.</b> The template adds the family's name, their gift and their personal link, which now shows their photos.</li>
+            <li><b>Sent from the couple's own number.</b> One tap opens WhatsApp (<code>https://wa.me/&lt;number&gt;?text=&lt;message&gt;</code>) with the message ready, and the couple taps send. It feels personal and needs no WhatsApp Business API approval.</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="security">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Security and privacy</p>
+        <h2>What keeps guests safe</h2>
+      </div>
+      <div class="grid-2">
+        <div class="item"><h4>Unguessable links</h4><p>Every family and role link contains 16 random bytes. The couple can regenerate any of them, for example if the stage link gets forwarded.</p></div>
+        <div class="item"><h4>No database access from the browser</h4><p>Row Level Security is on with no rules. Only server code holding the service-role key, kept in Vercel's environment variables, can read or write.</p></div>
+        <div class="item"><h4>Phone numbers aren't passwords</h4><p>Registering or checking in with a known number never opens that family's page.</p></div>
+        <div class="item"><h4>Private photos</h4><p>Photos live in a private bucket. Pages get signed links that expire after an hour.</p></div>
+        <div class="item"><h4>Need-to-know screens</h4><p>The public TV board shows numbers, not names. Only the couple sees amounts.</p></div>
+        <div class="item"><h4>Minimal data</h4><p>Names, phone numbers and headcounts. No face data, no card or bank details. Deleting the wedding deletes everything, photos included.</p></div>
+        <div class="item"><h4>Validated on the server</h4><p>Every server action checks its input (lengths, allowed values, phone format) and that the link it came from may make that change.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="failures">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Failure handling</p>
+        <h2>When things go wrong</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>What goes wrong</th><th>What happens</th></tr></thead>
+          <tbody>
+            <tr><td>The venue network drops</td><td>The stage screen keeps working and sends its actions when the connection is back. Guest pages catch up on their next status check.</td></tr>
+            <tr><td>A camera's clock is wrong, or set to another time zone</td><td>The QR clock photo corrects both.</td></tr>
+            <tr><td>The photographer forgot the QR photo</td><td>Tap one photo and choose who's in it. Stray photos can be moved by hand.</td></tr>
+            <tr><td>A guest has no smartphone</td><td>The stage manager adds them as a walk-in and tells them their number.</td></tr>
+            <tr><td>A guest lost their link</td><td>The couple resends it on WhatsApp. At the venue, checking in by phone number shows their token and place in line.</td></tr>
+            <tr><td>Two guests claim the same gift</td><td>The database lets exactly one win. The other sees “just taken”.</td></tr>
+            <tr><td>Someone claims a gift and never buys it</td><td>The couple releases the claim.</td></tr>
+            <tr><td>An envelope has no token</td><td>Search by name on the counting screen, or file it under “unknown”.</td></tr>
+            <tr><td>A called family isn't there</td><td>Tap Skip. They stay one tap away, and that call doesn't count as a turn.</td></tr>
+            <tr><td>The couple takes a break</td><td>Tap Pause. Estimates show “stage paused”, and photos from the break aren't matched.</td></tr>
+            <tr><td>A guest uses an iPhone</td><td>Push needs the page on the home screen, so the page also alerts while open and the TV board shows the numbers.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="demo">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">For the team</p>
+        <h2>Finals demo, about four minutes</h2>
+      </div>
+      <ol class="steps">
+        <li><div><p><b>Invite.</b> The projector shows the invite QR. Judges scan it and RSVP as families. Two of them tap the same gift at once: one gets it, the other sees “just taken”.</p></div></li>
+        <li><div><p><b>Arrive.</b> The couple taps Start on the reception. Judges tap “We've arrived” and get tokens, and the kitchen view counts up.</p></div></li>
+        <li><div><p><b>Queue.</b> Flag one judge as “Nanaji, 82” and watch them move up, while everyone else keeps their order.</p></div></li>
+        <li><div><p><b>Stage.</b> Call three judges to the front and photograph them with a camera set two hours wrong. Photograph the QR clock first.</p></div></li>
+        <li><div><p><b>Photos.</b> Upload the card. “This camera is 2 h 0 min behind”, and every photo carries the judges' names. Their phones show “Your stage photos are ready”.</p></div></li>
+        <li><div><p><b>Ledger and thanks.</b> Type their tokens into the counting screen and open the ledger: “Nobody typed a name.” Then tap thank-you for one judge and let their WhatsApp buzz.</p></div></li>
+      </ol>
+      <p class="muted">Bring your own mobile hotspot. Conference Wi-Fi is the banquet-hall network problem in miniature.</p>
+    </div>
+  </section>
+
+  <section id="plan">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">For the team</p>
+        <h2>Build plan</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Day</th><th>Build</th><th>Done when</th></tr></thead>
+          <tbody>
+            <tr><td>Wed 18 Nov</td><td>Database tables and sample data; invite, RSVP and family page; the couple can set up functions and the wishlist</td><td>A guest can RSVP from a phone</td></tr>
+            <tr><td>Thu 19 Nov</td><td>Wishlist claims; check-in and tokens; stage screen; queue order and wait estimates, with tests; status updates; TV board; kitchen view</td><td>A room full of phones can join a live queue</td></tr>
+            <tr><td>Fri 20 Nov</td><td>QR clock; upload page (exifr, jsQR, resizing, signed uploads); photo matching; album and family photo pages; push notifications</td><td>Photos from a camera with the wrong time get the right names</td></tr>
+            <tr><td>Sat 21 Nov</td><td>Counting screen, ledger and CSV export; thank-you links; polish; demo video; submit</td><td>The whole journey works end to end</td></tr>
+            <tr><td>22–24 Nov</td><td>Rehearse the demo. If anyone you know has a reception on the 24th, ask the couple whether you can try it there</td><td>Real numbers on one slide</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid-2">
+        <div class="item">
+          <h4>With three or four people</h4>
+          <ul class="points">
+            <li><b>A:</b> invite, RSVP, wishlist, kitchen view and the couple's dashboard.</li>
+            <li><b>B:</b> check-in, queue, stage screen, TV board and push.</li>
+            <li><b>C:</b> photo upload, matching and the album.</li>
+            <li><b>First one done:</b> the ledger and thank-yous.</li>
+          </ul>
+          <p class="muted small">Agree on the tables together on day 1 before splitting up.</p>
+        </div>
+        <div class="item">
+          <h4>Tests</h4>
+          <ul class="points">
+            <li>Unit tests with Node's built-in runner for the two pure functions that matter most: queue order with wait estimates, and photo matching.</li>
+            <li>One Playwright test for the whole journey: RSVP → claim → arrive → call → upload → ledger.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="scope">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Scope</p>
+        <h2>What we build later, and what we never build</h2>
+      </div>
+      <div class="grid-2">
+        <div class="item">
+          <h3>Deliberately not building</h3>
+          <ul class="points">
+            <li><b>Venue, décor and caterer marketplaces.</b> WedMeGood and WeddingWire India already do this, it needs vendor data we don't have, and every generic wedding app has one.</li>
+            <li><b>Muhurat calculation.</b> Families follow their pandit, traditions differ by region, and even published muhurat lists for November 2026 disagree.</li>
+            <li><b>Face recognition.</b> Time does the matching, so there's no biometric data to store or leak.</li>
+            <li><b>Payments.</b> UPI already works. We only make sure the token travels in the note.</li>
+            <li><b>Native apps.</b> A link and a QR code mean nothing to install at the venue.</li>
+            <li><b>WhatsApp Business API or SMS.</b> Approval, and India's DLT registration for SMS, take longer than a hackathon.</li>
+          </ul>
+        </div>
+        <div class="item">
+          <h3>After the hackathon</h3>
+          <ul class="points">
+            <li>WhatsApp one-time codes, so a family can open their page on a new phone.</li>
+            <li>Import a bank or UPI statement and match UPI shagun to families from the notes.</li>
+            <li>Hindi and regional-language screens.</li>
+            <li>Special meal counts for the kitchen, such as Jain and vegetarian.</li>
+            <li>An “add to home screen” prompt, so iPhone guests get push notifications.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="glossary">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Glossary</p>
+        <h2>Wedding terms used on this page</h2>
+      </div>
+      <dl class="glossary">
+        <div><dt>Shagun</dt><dd>A cash gift to the couple, traditionally in an envelope (often with a one-rupee coin) and increasingly sent by UPI.</dd></div>
+        <div><dt>Lena-dena diary</dt><dd>The family notebook of who gave what, used to return the gesture at other families' weddings.</dd></div>
+        <div><dt>Functions</dt><dd>The separate events of one wedding (Haldi, Mehendi, Sangeet, the wedding, the reception), often over several days, each with its own guest count.</dd></div>
+        <div><dt>Stage line</dt><dd>The queue to go on stage, bless the couple, hand over shagun and have a photo taken.</dd></div>
+        <div><dt>UPI</dt><dd>India's instant payment system. Every payment can carry a short note.</dd></div>
+        <div><dt>“Haan, aayenge”</dt><dd>“Yes, we'll come”: the RSVP that tells a caterer nothing.</dd></div>
+        <div><dt>“Ek aur photo”</dt><dd>“One more photo”: the reason stage turns run long.</dd></div>
+        <div><dt>Pandit</dt><dd>The family priest, who usually chooses the wedding date.</dd></div>
+        <div><dt>Muhurat</dt><dd>An auspicious date and time for the wedding.</dd></div>
+        <div><dt>Dev Uthani Ekadashi</dt><dd>The festival day that marks the start of the wedding season.</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">Pehle Aap · Festive Hacks 2026 · Wedding season</div>
+</footer>
+
+<script>
+(() => {
+  // The due-time rule from the design, run on example families.
+  const MIN = 60000;
+  const DUE = { regular: 45, elder: 15, leaveBuffer: 10 };
+  const at = (h, m) => new Date(2026, 10, 25, h, m).getTime();
+  const fmt = t => {
+    const d = new Date(t);
+    return (d.getHours() % 12 || 12) + ":" + String(d.getMinutes()).padStart(2, "0");
+  };
+  const families = [
+    { name: "Sharma", arrived: at(19, 45), elders: false, leaveBy: null },
+    { name: "Gupta", arrived: at(20, 0), elders: false, leaveBy: null },
+    { name: "Bose", arrived: at(20, 10), elders: false, leaveBy: null },
+    { name: "Verma (Nanaji, 82)", arrived: at(20, 20), elders: true, leaveBy: null },
+    { name: "Iyer", arrived: at(20, 30), elders: false, leaveBy: null },
+    { name: "Reddy", arrived: at(20, 50), elders: false, leaveBy: null },
+    { name: "Khan", arrived: at(21, 10), elders: false, leaveBy: at(21, 40) }
+  ];
+  const leaveTimes = [at(21, 0), at(21, 30), at(21, 40), at(22, 0), at(22, 30)];
+
+  function due(f) {
+    const t = f.arrived;
+    const options = [t + DUE.regular * MIN];
+    if (f.elders) options.push(t + DUE.elder * MIN);
+    if (f.leaveBy) options.push(f.leaveBy - DUE.leaveBuffer * MIN);
+    return Math.max(t, Math.min(...options));
+  }
+
+  const inBody = document.getElementById("qd-in");
+  const out = document.getElementById("qd-out");
+  if (inBody && out) {
+    inBody.innerHTML = families.map((f, i) => `
+      <tr>
+        <td>${f.name}</td>
+        <td class="num">${fmt(f.arrived)}</td>
+        <td><input type="checkbox" id="qd-elder-${i}" data-i="${i}" aria-label="${f.name}: someone 75 or older"${f.elders ? " checked" : ""}></td>
+        <td><select id="qd-leave-${i}" data-i="${i}" aria-label="${f.name}: must leave by">
+          <option value="">No</option>
+          ${leaveTimes.map(t => `<option value="${t}"${t === f.leaveBy ? " selected" : ""}>${fmt(t)}</option>`).join("")}
+        </select></td>
+      </tr>`).join("");
+
+    const render = () => {
+      const byArrival = [...families].sort((a, b) => a.arrived - b.arrived);
+      const order = [...families].sort((a, b) => due(a) - due(b) || a.arrived - b.arrived);
+      out.innerHTML = order.map((f, i) => {
+        const moved = byArrival.indexOf(f) - i;
+        const tags = [f.elders && "75+", f.leaveBy && "leaves " + fmt(f.leaveBy)]
+          .filter(Boolean).map(tag => `<em>${tag}</em>`).join("");
+        return `<li><span class="pos">${i + 1}</span><span class="who">${f.name}${tags}</span>` +
+          `<span class="due">due ${fmt(due(f))}</span>` +
+          `<span class="moved${moved > 0 ? " up" : ""}">${moved > 0 ? "up " + moved : ""}</span></li>`;
+      }).join("");
+    };
+
+    inBody.addEventListener("change", e => {
+      const el = e.target;
+      const f = families[Number(el.dataset.i)];
+      if (!f) return;
+      if (el.type === "checkbox") f.elders = el.checked;
+      else f.leaveBy = el.value ? Number(el.value) : null;
+      render();
+    });
+    render();
+  }
+
+  // Toggle between corrected and raw camera times.
+  const clock = document.getElementById("clock");
+  const toggle = document.getElementById("clock-toggle");
+  if (clock && toggle) {
+    toggle.addEventListener("click", () => {
+      const raw = clock.classList.toggle("raw");
+      toggle.setAttribute("aria-pressed", String(raw));
+      toggle.textContent = raw ? "Apply the QR clock correction" : "Show the camera's own times";
+    });
+  }
+})();
+</script>

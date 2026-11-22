@@ -1,0 +1,207 @@
+{
+  "wedding": {
+    "name": "Riya & Arjun",
+    "event_start": "2026-11-21",
+    "event_end": "2026-11-25",
+    "venue_name": "Demo Wedding Venue",
+    "city": "Bengaluru",
+    "timezone": "Asia/Kolkata"
+  },
+  "functions": [
+    {
+      "name": "Haldi",
+      "starts_at": "2026-11-21T10:00:00+05:30",
+      "sort_order": 1
+    },
+    {
+      "name": "Mehendi",
+      "starts_at": "2026-11-22T15:00:00+05:30",
+      "sort_order": 2
+    },
+    {
+      "name": "Sangeet",
+      "starts_at": "2026-11-23T18:00:00+05:30",
+      "sort_order": 3
+    },
+    {
+      "name": "Wedding",
+      "starts_at": "2026-11-24T11:30:00+05:30",
+      "sort_order": 4
+    },
+    {
+      "name": "Reception",
+      "starts_at": "2026-11-25T19:00:00+05:30",
+      "sort_order": 5
+    }
+  ],
+  "people": [
+    {
+      "full_name": "Riya",
+      "role": "couple",
+      "preferred_lang": "en-IN",
+      "access_key": "demo-couple-key"
+    },
+    {
+      "full_name": "Rohan",
+      "role": "team",
+      "preferred_lang": "en-IN",
+      "access_key": "demo-team-key"
+    },
+    {
+      "full_name": "Sharma Tent House",
+      "role": "vendor",
+      "preferred_lang": "kn-IN",
+      "access_key": "demo-vendor-key",
+      "vendor_name": "Sharma Tent House"
+    },
+    {
+      "full_name": "Gupta family",
+      "role": "guest",
+      "preferred_lang": "hi-IN",
+      "access_key": "demo-guest-key",
+      "family_name": "Gupta family"
+    }
+  ],
+  "vendors": [
+    {
+      "name": "Sharma Tent House",
+      "category": "Decor and flowers",
+      "contact_name": "Mausi",
+      "source": "own_vendor",
+      "agreed_amount": 180000,
+      "paid": 90000,
+      "next_due": "2026-11-22"
+    },
+    {
+      "name": "Annapurna Caterers",
+      "category": "Food and catering",
+      "contact_name": "Caterer POC",
+      "source": "listing",
+      "agreed_amount": 640000,
+      "paid": 192000,
+      "next_due": "2026-11-23"
+    },
+    {
+      "name": "Lens Story Studio",
+      "category": "Photography and film",
+      "contact_name": "Arvind",
+      "source": "listing",
+      "agreed_amount": 220000,
+      "paid": 66000,
+      "next_due": "2026-11-18"
+    },
+    {
+      "name": "Pandit Ramesh Shastri",
+      "category": "Rituals",
+      "source": "own_vendor",
+      "agreed_amount": 21000,
+      "paid": 21000
+    },
+    {
+      "name": "Royal Cars",
+      "category": "Hospitality and transport",
+      "source": "own_vendor",
+      "agreed_amount": 48000,
+      "paid": 0,
+      "next_due": "2026-11-24"
+    },
+    {
+      "name": "DJ Beats",
+      "category": "Entertainment",
+      "source": "listing",
+      "agreed_amount": 60000,
+      "paid": 0
+    }
+  ],
+  "tasks": [
+    {
+      "title": "Plate count sent to caterer",
+      "type": "prep_item",
+      "function": "Reception",
+      "owner": "Rohan",
+      "due_at": "2026-11-24T17:00:00+05:30",
+      "status": "confirmed"
+    },
+    {
+      "title": "Stage QR clock tested with both cameras",
+      "type": "prep_item",
+      "function": "Reception",
+      "owner": "Rohan",
+      "due_at": "2026-11-25T16:00:00+05:30",
+      "status": "at_risk"
+    },
+    {
+      "title": "Return gifts packed: 320",
+      "type": "prep_item",
+      "function": "Reception",
+      "owner": "Rohan",
+      "due_at": "2026-11-25T15:00:00+05:30",
+      "status": "arranged"
+    },
+    {
+      "title": "Venue TV and HDMI for the token board",
+      "type": "prep_item",
+      "function": "Reception",
+      "owner": "Rohan",
+      "due_at": "2026-11-25T16:00:00+05:30",
+      "status": "to_do"
+    },
+    {
+      "title": "Envelope bag custodian named",
+      "type": "prep_item",
+      "function": "Reception",
+      "owner": "Rohan",
+      "due_at": "2026-11-24T17:00:00+05:30",
+      "status": "confirmed"
+    },
+    {
+      "title": "Sangeet stage setup",
+      "type": "prep_item",
+      "function": "Sangeet",
+      "owner": "Sharma Tent House",
+      "vendor_name": "Sharma Tent House",
+      "due_at": "2026-11-23T12:00:00+05:30",
+      "status": "arranged"
+    }
+  ],
+  "families": [
+    {
+      "family_name": "Gupta family",
+      "side": "groom",
+      "relation": "Family",
+      "headcount": 5,
+      "preferred_lang": "hi-IN",
+      "invite_key": "demo-gupta-link"
+    },
+    {
+      "family_name": "Sharma family",
+      "side": "bride",
+      "relation": "Family",
+      "headcount": 4,
+      "preferred_lang": "en-IN",
+      "invite_key": "demo-sharma-link"
+    }
+  ],
+  "gifts": [
+    {
+      "family_name": "Gupta family",
+      "gift_type": "cash",
+      "description": "Envelope",
+      "token_no": 147,
+      "amount": 1101
+    },
+    {
+      "family_name": "Sharma family",
+      "gift_type": "upi",
+      "description": "Shagun",
+      "token_no": 148,
+      "amount": 5001
+    },
+    {
+      "family_name": "Gupta family",
+      "gift_type": "gift_box",
+      "description": "Silver bowl set",
+      "token_no": 149
+    }
+  ]
+}
