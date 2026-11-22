@@ -37,6 +37,7 @@ IMAGE_TAG="${IMAGE_TAG:-$(date +%Y%m%d%H%M%S)}"
 
 APP_DOMAIN="${APP_DOMAIN:-}"
 
+
 # ------------------------------------------------------------
 # 2. REQUIRED CONFIGURATION
 # ------------------------------------------------------------
@@ -45,15 +46,27 @@ APP_DOMAIN="${APP_DOMAIN:-}"
 : "${SARVAM_API_KEY:?Set SARVAM_API_KEY in .env.deploy}"
 : "${FLAGSMITH_SERVER_KEY:?Set FLAGSMITH_SERVER_KEY in .env.deploy}"
 : "${GEOCODING_API_KEY:?Set GEOCODING_API_KEY in .env.deploy}"
-: "${NUDGEBEE_AGENT_KEY:?Set NUDGEBEE_AGENT_KEY in .env.deploy}"
+
+# NudgeBee is optional
+NUDGEBEE_AGENT_KEY="${NUDGEBEE_AGENT_KEY:-}"
+NUDGEBEE_ENABLED="${NUDGEBEE_ENABLED:-false}"
+
+if [[ -z "$NUDGEBEE_AGENT_KEY" ]]; then
+    NUDGEBEE_ENABLED=false
+    echo "INFO: NudgeBee integration disabled."
+else
+    NUDGEBEE_ENABLED=true
+    echo "INFO: NudgeBee integration enabled."
+fi
 
 # Optional Flagsmith bootstrap
 BOOTSTRAP_FLAGSMITH="${BOOTSTRAP_FLAGSMITH:-false}"
 
 if [[ "$BOOTSTRAP_FLAGSMITH" == "true" ]]; then
-  : "${FLAGSMITH_ADMIN_API_TOKEN:?Set FLAGSMITH_ADMIN_API_TOKEN}"
-  : "${FLAGSMITH_PROJECT:?Set FLAGSMITH_PROJECT}"
+    : "${FLAGSMITH_ADMIN_API_TOKEN:?Set FLAGSMITH_ADMIN_API_TOKEN}"
+    : "${FLAGSMITH_PROJECT:?Set FLAGSMITH_PROJECT}"
 fi
+
 
 # ------------------------------------------------------------
 # 3. TOOL CHECKS
